@@ -1,4 +1,4 @@
-# physics.py
+from pygame.math import Vector2
 
 def update_car(car, dt):
     apply_acceleration(car, dt)
