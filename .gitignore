@@ -3,10 +3,23 @@ __pycache__/
 *.pyc
 *.pyo
 *.pyd
-*.env
 
-# VS Code
+# env
+.venv/
+venv/
+.env
+
+# IDE
 .vscode/
 
-# Others
+# OS
 .DS_Store
+
+# AI training outputs
+models/
+checkpoints/
+runs/
+logs/
+*.pt
+*.pth
+*.onnx
