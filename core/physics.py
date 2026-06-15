@@ -3,6 +3,7 @@ from pygame.math import Vector2
 def update_car(car, dt):
     apply_acceleration(car, dt)
     apply_steering(car, dt)
+    rotate_car(car, dt)
     move_car(car, dt)
 
 
@@ -26,12 +27,12 @@ def apply_steering(car, dt):
 
 def rotate_car(car, dt):
     turn_strength = car.steering_angle / car.MAX_STEERING_ANGLE
-    car.heading += turn_strength * car.TURN_RATE
+    car.heading += turn_strength * car.TURN_RATE * dt
 
 def move_car(car, dt):
     if abs(car.speed) <0.01:
         car.speed = 0
+
     direction = Vector2(1, 0)
-    car.heading += (car.steering_angle * car.TURN_RATE * dt)
     direction.rotate_ip(car.heading)
     car.position += direction * car.speed * dt
