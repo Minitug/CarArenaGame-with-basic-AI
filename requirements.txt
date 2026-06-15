@@ -1,0 +1,8 @@
+CarArenaGame ideas
+Car Position, Movement, Rotation, Velocity, Acceleration, Friction, Wall collision, Obstacles, Drifting
+
+GA AI
+Implement AI that randomly chooses inputs and determines best results
+
+NEAT AI
+Implement AI, that can learn from mistakes.
