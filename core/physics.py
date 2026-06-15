@@ -32,6 +32,6 @@ def move_car(car, dt):
     if abs(car.speed) <0.01:
         car.speed = 0
     direction = Vector2(1, 0)
+    car.heading += (car.steering_angle * car.TURN_RATE * dt)
     direction.rotate_ip(car.heading)
     car.position += direction * car.speed * dt
-    car.heading += (car.steering_angle * car.TURN_RATE * dt)
