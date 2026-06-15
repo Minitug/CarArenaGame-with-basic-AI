@@ -1,3 +1,5 @@
+from pygame.math import Vector2
+
 class Car:
 
     MAX_SPEED = 400
@@ -8,9 +10,10 @@ class Car:
 
 
     def __init__(self, x, y):
-        self.x = x
-        self.y = y
-        self.velocity = 0
+        # self.x = x
+        # self.y = y
+        self.position = Vector2(x, y)
+        self.speed = 0
         self.heading = 0
         self.throttle = 0
         self.steering = 0
@@ -20,9 +23,8 @@ class Car:
         self.steering = max(-1, min(1, steering))
 
     def reset(self, x, y):
-        self.x = x
-        self.y = y
-        self.velocity = 0
+        self.position = Vector2(x, y)
+        self.speed = 0
         self.heading = 0
         self.throttle = 0
         self.steering = 0
