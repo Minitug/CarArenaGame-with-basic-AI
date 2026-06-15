@@ -6,7 +6,9 @@ class Car:
     MAX_ACCELERATION = 240
     WIDTH = 190
     LENGTH = 340
-    MAX_STEERING = 1
+    MAX_STEERING_ANGLE = 1
+    STEERING_SPEED = 120
+    STEERING_RETURN_SPEED = 180
 
 
     def __init__(self, x, y):
