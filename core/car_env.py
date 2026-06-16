@@ -1,5 +1,6 @@
 from pygame.math import Vector2
 from core.car import Car
+from core.physics import update_car
 
 class CarEnv:
     def __init__(self, width, height, spawn, verbose=True, players = 1, max_cars = 4):
@@ -22,4 +23,7 @@ class CarEnv:
         for car in self.cars:
             car.reset(position=self.spawn)
 
-    
+    def step(self, action, dt):
+        for car in self.cars:
+            car.set_controls(*action)
+            update_car(car, dt)
