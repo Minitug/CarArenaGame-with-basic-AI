@@ -71,6 +71,7 @@ while running:
         env.reset()
     else:
         env.step(action, dt)
+        env.collision_check()
 
     draw(screen, env, font)
 

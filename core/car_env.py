@@ -27,3 +27,18 @@ class CarEnv:
         for car in self.cars:
             car.set_controls(*action)
             update_car(car, dt)
+
+    def collision_check(self):
+        for car in self.cars:
+            if car.position.x - car.LENGTH / 2 < 0:
+                car.speed = 0
+                car.position.x = car.LENGTH / 2 + 1
+            elif car.position.x + car.LENGTH / 2 > self.width:
+                car.speed = 0
+                car.position.x = self.width - car.LENGTH / 2 - 1
+            elif car.position.y - car.WIDTH / 2 < 0:
+                car.speed = 0
+                car.position.y = car.WIDTH / 2 + 1
+            elif car.position.y + car.WIDTH / 2 > self.height:
+                car.speed = 0
+                car.position.y = self.height - car.WIDTH / 2 - 1
