@@ -1,5 +1,7 @@
 from pygame.math import Vector2
 
+from core import car
+
 def update_car(car, dt):
     apply_acceleration(car, dt)
     apply_friction(car, dt)
@@ -11,9 +13,16 @@ def update_car(car, dt):
 def apply_acceleration(car, dt):
     if car.throttle > 0:
         acceleration_factor = 1 - (car.speed / car.MAX_SPEED)
-    else:
-        acceleration_factor = 1 - (car.speed / car.MAX_REVERSE_SPEED)
-    car.speed += car.throttle * car.MAX_ACCELERATION * acceleration_factor * dt
+        car.speed += car.throttle * car.MAX_ACCELERATION * acceleration_factor * dt
+        car.speed = min(car.speed, car.MAX_SPEED)
+    elif car.throttle < 0:
+        if car.speed > 0:
+            car.speed = max(0, car.speed + car.BRAKE_FORCE * car.throttle * dt)
+        else:
+            reverse_factor = 1 - car.speed / car.MAX_REVERSE_SPEED
+            car.speed += car.MAX_REVERSE_ACCELERATION * reverse_factor * (car.throttle) * dt
+            if car.speed < car.MAX_REVERSE_SPEED:
+                car.speed = max(car.speed, car.MAX_REVERSE_SPEED)
 
 
 def apply_steering(car, dt):
@@ -37,7 +46,7 @@ def rotate_car(car, dt):
         return
     speed_ratio = (car.speed) / car.MAX_SPEED
 
-    turn_strength = car.steering_angle / car.MAX_STEERING_ANGLE * (1 - speed_ratio)
+    turn_strength = (car.steering_angle / car.MAX_STEERING_ANGLE) * (1 - speed_ratio)
     car.heading += turn_strength * car.TURN_RATE * dt
 
 def move_car(car, dt):
