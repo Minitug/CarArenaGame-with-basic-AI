@@ -3,14 +3,15 @@ from core.car_env import CarEnv
 
 def draw(screen, env: CarEnv, font):
     screen.fill((0, 0, 0))
+    pygame.draw.rect(screen, (168, 13, 13), (0, 0, env.width, env.height), env.wall_thickness)
 
     for car in env.cars:
-        
+
         car_surface = pygame.Surface((car.LENGTH, car.WIDTH), pygame.SRCALPHA)
 
         pygame.draw.rect(
             car_surface,
-            (255, 0, 0),
+            (13, 44, 168),
             (0, 0, car.LENGTH, car.WIDTH)
         )
 
@@ -21,7 +22,7 @@ def draw(screen, env: CarEnv, font):
         )
 
         screen.blit(rotated_surface, rotated_rect.topleft)
-        
+
         text = font.render(f"Speed: {car.speed:.2f} km/h", True, (255, 255, 255))
         screen.blit(text, (screen.get_width() - text.get_width() - 20, screen.get_height() - text.get_height() - 20))
     pygame.display.flip()

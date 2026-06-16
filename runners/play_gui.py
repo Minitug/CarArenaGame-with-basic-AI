@@ -35,6 +35,7 @@ new_env_height = 2500
 new_env_verbose = True
 new_env_players = 1
 new_env_max_cars = 1
+new_env_wall_thickness = 4
 if new_env_width > MAX_SCREEN_WIDTH:
     new_env_width = MAX_SCREEN_WIDTH
 if new_env_height > MAX_SCREEN_HEIGHT:
@@ -51,7 +52,7 @@ clock = pygame.time.Clock()
 running = True
 
 # create env
-env = CarEnv(width = new_env_width, height = new_env_height, spawn = new_env_spawn, players = new_env_players, max_cars = new_env_max_cars, verbose = new_env_verbose)
+env = CarEnv(width = new_env_width, height = new_env_height, spawn = new_env_spawn, players = new_env_players, max_cars = new_env_max_cars, verbose = new_env_verbose, wall_thickness = new_env_wall_thickness)
 
 
 
