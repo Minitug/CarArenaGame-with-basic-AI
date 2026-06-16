@@ -1,5 +1,7 @@
 from pygame.math import Vector2
 
+from core import car
+
 def update_car(car, dt):
     apply_acceleration(car, dt)
     apply_friction(car, dt)
@@ -11,9 +13,16 @@ def update_car(car, dt):
 def apply_acceleration(car, dt):
     if car.throttle > 0:
         acceleration_factor = 1 - (car.speed / car.MAX_SPEED)
-    else:
-        acceleration_factor = 1 - (car.speed / car.MAX_REVERSE_SPEED)
-    car.speed += car.throttle * car.MAX_ACCELERATION * acceleration_factor * dt
+        car.speed += car.throttle * car.MAX_ACCELERATION * acceleration_factor * dt
+        car.speed = min(car.speed, car.MAX_SPEED)
+    elif car.throttle < 0:
+        if car.speed > 0:
+            car.speed = max(0, car.speed + car.BRAKE_FORCE * car.throttle * dt)
+        else:
+            reverse_factor = 1 - car.speed / car.MAX_REVERSE_SPEED
+            car.speed += car.MAX_REVERSE_ACCELERATION * reverse_factor * (car.throttle) * dt
+            if car.speed < car.MAX_REVERSE_SPEED:
+                car.speed = max(car.speed, car.MAX_REVERSE_SPEED)
 
 
 def apply_steering(car, dt):
@@ -23,14 +32,21 @@ def apply_steering(car, dt):
         rate = car.STEERING_SPEED
     else:
         rate = car.STEERING_RETURN_SPEED
-
+    
     if car.steering_angle < target_angle:
         car.steering_angle = min(car.steering_angle + rate * dt, target_angle)
     elif car.steering_angle > target_angle:
         car.steering_angle = max(car.steering_angle - rate * dt, target_angle)
 
+    current_turning_drag = car.TURNING_DRAG * abs(car.steering_angle / car.MAX_STEERING_ANGLE)
+    car.speed *= (1 - current_turning_drag * dt)
+
 def rotate_car(car, dt):
-    turn_strength = car.steering_angle / car.MAX_STEERING_ANGLE
+    if car.speed == 0:
+        return
+    speed_ratio = (car.speed) / car.MAX_SPEED
+
+    turn_strength = (car.steering_angle / car.MAX_STEERING_ANGLE) * (1 - speed_ratio)
     car.heading += turn_strength * car.TURN_RATE * dt
 
 def move_car(car, dt):
@@ -44,7 +60,7 @@ def move_car(car, dt):
 def apply_friction(car, dt):
     this_friction = car.FRICTION
     if car.throttle != 0:
-        this_friction = car.FRICTION * 0.1
+        this_friction = car.FRICTION * 0.05
     if car.speed > 0:
         car.speed = max(car.speed - this_friction * dt, 0)
     elif car.speed < 0:
