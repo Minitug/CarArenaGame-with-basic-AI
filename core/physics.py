@@ -23,11 +23,14 @@ def apply_steering(car, dt):
         rate = car.STEERING_SPEED
     else:
         rate = car.STEERING_RETURN_SPEED
-
+    
     if car.steering_angle < target_angle:
         car.steering_angle = min(car.steering_angle + rate * dt, target_angle)
     elif car.steering_angle > target_angle:
         car.steering_angle = max(car.steering_angle - rate * dt, target_angle)
+
+    current_turning_drag = car.TURNING_DRAG * abs(car.steering_angle / car.MAX_STEERING_ANGLE)
+    car.speed *= (1 - current_turning_drag * dt)
 
 def rotate_car(car, dt):
     turn_strength = car.steering_angle / car.MAX_STEERING_ANGLE
@@ -44,7 +47,7 @@ def move_car(car, dt):
 def apply_friction(car, dt):
     this_friction = car.FRICTION
     if car.throttle != 0:
-        this_friction = car.FRICTION * 0.1
+        this_friction = car.FRICTION * 0.05
     if car.speed > 0:
         car.speed = max(car.speed - this_friction * dt, 0)
     elif car.speed < 0:

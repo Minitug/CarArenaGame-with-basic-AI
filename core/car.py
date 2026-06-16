@@ -12,6 +12,7 @@ class Car:
     STEERING_RETURN_SPEED = 180
     TURN_RATE = 180
     FRICTION = 80
+    TURNING_DRAG = 0.5
 
 
     def __init__(self, position):
