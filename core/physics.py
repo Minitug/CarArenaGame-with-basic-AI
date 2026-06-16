@@ -33,9 +33,11 @@ def apply_steering(car, dt):
     car.speed *= (1 - current_turning_drag * dt)
 
 def rotate_car(car, dt):
-    speed_ratio = abs(car.speed) / car.MAX_SPEED
-    low_speed_factor = min(1, speed_ratio * 4)
-    turn_strength = car.steering_angle / car.MAX_STEERING_ANGLE * low_speed_factor
+    if car.speed == 0:
+        return
+    speed_ratio = (car.speed) / car.MAX_SPEED
+
+    turn_strength = car.steering_angle / car.MAX_STEERING_ANGLE * (1 - speed_ratio)
     car.heading += turn_strength * car.TURN_RATE * dt
 
 def move_car(car, dt):

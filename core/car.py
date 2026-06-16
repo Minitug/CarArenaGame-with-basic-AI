@@ -9,11 +9,11 @@ class Car:
     LENGTH = 34
     MAX_STEERING_ANGLE = 35
     STEERING_SPEED = 120
-    STEERING_RETURN_SPEED = 180
-    TURN_RATE = 180
+    STEERING_RETURN_SPEED = STEERING_SPEED * 1.5
+    TURN_RATE = 110 
     FRICTION = 80
     TURNING_DRAG = 0.5
-    
+
 
 
     def __init__(self, position):
