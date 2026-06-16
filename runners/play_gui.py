@@ -46,6 +46,7 @@ pygame.init()
 screen = pygame.display.set_mode((new_env_width, new_env_height))
 pygame.display.set_caption("Car Arena")
 
+font = pygame.font.SysFont(None, 32)
 clock = pygame.time.Clock()
 running = True
 
@@ -71,6 +72,6 @@ while running:
     else:
         env.step(action, dt)
 
-    draw(screen, env)
+    draw(screen, env, font)
 
 pygame.quit()

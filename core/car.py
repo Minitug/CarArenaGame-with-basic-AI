@@ -3,6 +3,7 @@ from pygame.math import Vector2
 class Car:
 
     MAX_SPEED = 400
+    MAX_REVERSE_SPEED = -80
     MAX_ACCELERATION = 240
     WIDTH = 19
     LENGTH = 34
@@ -10,6 +11,7 @@ class Car:
     STEERING_SPEED = 120
     STEERING_RETURN_SPEED = 180
     TURN_RATE = 180
+    FRICTION = 80
 
 
     def __init__(self, position):
