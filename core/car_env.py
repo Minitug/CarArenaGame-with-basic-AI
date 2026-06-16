@@ -21,3 +21,5 @@ class CarEnv:
     def reset(self):
         for car in self.cars:
             car.reset(position=self.spawn)
+
+    
