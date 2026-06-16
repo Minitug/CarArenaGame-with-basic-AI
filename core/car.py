@@ -13,6 +13,7 @@ class Car:
     TURN_RATE = 180
     FRICTION = 80
     TURNING_DRAG = 0.5
+    
 
 
     def __init__(self, position):
