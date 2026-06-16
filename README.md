@@ -20,7 +20,7 @@ This project focuses on building a simple driving environment with custom physic
 
 ## How to run
 1. Clone the repo  
-2. Create and activate a virtual environment
+2. Create and activate a Py v13 virtual environment. Alternatively just run the program with py -3.13
 3. Run from project root in .venv "python -m runners.play_gui"
 
 
