@@ -4,16 +4,19 @@ Python-based vehicle simulation project built as part of my AI learning journey.
 This project focuses on building a simple driving environment with custom physics and later training AI agents to drive efficiently.
 
 ## Current Features
-- **Game**: Real-time car driving sandbox.  
-- **Physics**: Physics:
--- Acceleration and braking
--- Steering with gradual turn-in and return
--- Friction / coasting behaviour
--- Arena boundary collision
-- **Rendering:** 
--- Pygame-based renderer
--- Rotating vehicle visualisation
--- HUD showing current speed
+### **Game**: 
+- Real-time car driving sandbox.  
+
+### **Physics**: Physics:
+- Acceleration and braking
+- Steering with gradual turn-in and return
+- Friction / coasting behaviour
+- Arena boundary collision
+
+### **Rendering**: 
+- Pygame-based renderer
+- Rotating vehicle visualisation
+- HUD showing current speed
 
 ## How to run
 1. Clone the repo  
